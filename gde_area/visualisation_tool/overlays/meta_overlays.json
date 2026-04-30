@@ -1,0 +1,255 @@
+{
+  "bounds": {
+    "west": -179.99999999999966,
+    "south": -56.00000000000137,
+    "east": 179.99999999998596,
+    "north": 83.22499999999306
+  },
+  "leaflet_bounds": [
+    [
+      -56.00000000000137,
+      -179.99999999999966
+    ],
+    [
+      83.22499999999306,
+      179.99999999998596
+    ]
+  ],
+  "layers": [
+    {
+      "id": "persist_class",
+      "label": "Persistence Class",
+      "file": "overlays/persist_class.tif",
+      "legend": [
+        {
+          "label": "Episodic",
+          "color": "#fec44f"
+        },
+        {
+          "label": "Seasonal",
+          "color": "#41ab5d"
+        },
+        {
+          "label": "Perennial",
+          "color": "#253494"
+        }
+      ]
+    },
+    {
+      "id": "wet_season_length",
+      "label": "Wet Season Length (months)",
+      "file": "overlays/wet_season_length.tif",
+      "legend": [
+        {
+          "label": "1 month",
+          "color": "#ffffb2"
+        },
+        {
+          "label": "6 months",
+          "color": "#fd8d3c"
+        },
+        {
+          "label": "12 months",
+          "color": "#000032"
+        }
+      ]
+    },
+    {
+      "id": "dry_stress",
+      "label": "Dry Season Stress",
+      "file": "overlays/dry_stress.tif",
+      "legend": [
+        {
+          "label": "Low",
+          "color": "#ffffff"
+        },
+        {
+          "label": "High",
+          "color": "#67000d"
+        }
+      ]
+    },
+    {
+      "id": "risk_pixel",
+      "label": "Pixel Risk Index",
+      "file": "overlays/risk_pixel.tif",
+      "legend": [
+        {
+          "label": "Low",
+          "color": "#1a9850"
+        },
+        {
+          "label": "Moderate",
+          "color": "#ffffbf"
+        },
+        {
+          "label": "High",
+          "color": "#a50026"
+        }
+      ]
+    },
+    {
+      "id": "monthly",
+      "label": "Monthly GDW Presence",
+      "animated": true,
+      "files": [
+        "overlays/monthly_01.tif",
+        "overlays/monthly_02.tif",
+        "overlays/monthly_03.tif",
+        "overlays/monthly_04.tif",
+        "overlays/monthly_05.tif",
+        "overlays/monthly_06.tif",
+        "overlays/monthly_07.tif",
+        "overlays/monthly_08.tif",
+        "overlays/monthly_09.tif",
+        "overlays/monthly_10.tif",
+        "overlays/monthly_11.tif",
+        "overlays/monthly_12.tif"
+      ],
+      "months": [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec"
+      ],
+      "monthly_stats": [
+        {
+          "month": 1,
+          "abbr": "Jan",
+          "area_km2": 12290217.1,
+          "area_perennial_km2": 6068374.6,
+          "area_seasonal_km2": 1063433.7,
+          "area_episodic_km2": 1729750.5,
+          "n_pixels": 19778406
+        },
+        {
+          "month": 2,
+          "abbr": "Feb",
+          "area_km2": 12207160.5,
+          "area_perennial_km2": 5854986.6,
+          "area_seasonal_km2": 1000990.3,
+          "area_episodic_km2": 1789627.6,
+          "n_pixels": 19383460
+        },
+        {
+          "month": 3,
+          "abbr": "Mar",
+          "area_km2": 12078329.9,
+          "area_perennial_km2": 5792933.8,
+          "area_seasonal_km2": 981656.3,
+          "area_episodic_km2": 1802134.6,
+          "n_pixels": 19182539
+        },
+        {
+          "month": 4,
+          "abbr": "Apr",
+          "area_km2": 12944003.1,
+          "area_perennial_km2": 6024443.6,
+          "area_seasonal_km2": 1057872.8,
+          "area_episodic_km2": 2118813.4,
+          "n_pixels": 21208930
+        },
+        {
+          "month": 5,
+          "abbr": "May",
+          "area_km2": 13271699.6,
+          "area_perennial_km2": 6222415.3,
+          "area_seasonal_km2": 1095947.4,
+          "area_episodic_km2": 2140388.1,
+          "n_pixels": 22493877
+        },
+        {
+          "month": 6,
+          "abbr": "Jun",
+          "area_km2": 13283828.0,
+          "area_perennial_km2": 6320304.0,
+          "area_seasonal_km2": 1146925.6,
+          "area_episodic_km2": 2121203.9,
+          "n_pixels": 23343686
+        },
+        {
+          "month": 7,
+          "abbr": "Jul",
+          "area_km2": 12384656.2,
+          "area_perennial_km2": 6180628.1,
+          "area_seasonal_km2": 1142788.6,
+          "area_episodic_km2": 1816150.6,
+          "n_pixels": 20926860
+        },
+        {
+          "month": 8,
+          "abbr": "Aug",
+          "area_km2": 12291515.9,
+          "area_perennial_km2": 5987872.1,
+          "area_seasonal_km2": 1081338.7,
+          "area_episodic_km2": 2002416.0,
+          "n_pixels": 20245106
+        },
+        {
+          "month": 9,
+          "abbr": "Sep",
+          "area_km2": 12566599.5,
+          "area_perennial_km2": 5892423.2,
+          "area_seasonal_km2": 1095208.1,
+          "area_episodic_km2": 2167128.6,
+          "n_pixels": 20815833
+        },
+        {
+          "month": 10,
+          "abbr": "Oct",
+          "area_km2": 12886251.1,
+          "area_perennial_km2": 5988172.9,
+          "area_seasonal_km2": 1157508.0,
+          "area_episodic_km2": 2298890.6,
+          "n_pixels": 21688509
+        },
+        {
+          "month": 11,
+          "abbr": "Nov",
+          "area_km2": 12861625.7,
+          "area_perennial_km2": 6203646.4,
+          "area_seasonal_km2": 1228215.2,
+          "area_episodic_km2": 2048112.5,
+          "n_pixels": 21370208
+        },
+        {
+          "month": 12,
+          "abbr": "Dec",
+          "area_km2": 12486398.7,
+          "area_perennial_km2": 6261889.9,
+          "area_seasonal_km2": 1157814.3,
+          "area_episodic_km2": 1726742.8,
+          "n_pixels": 20375476
+        }
+      ],
+      "legend": [
+        {
+          "label": "Episodic",
+          "color": "#fec44f"
+        },
+        {
+          "label": "Seasonal",
+          "color": "#41ab5d"
+        },
+        {
+          "label": "Perennial",
+          "color": "#253494"
+        }
+      ]
+    }
+  ],
+  "pixel_stats": {
+    "n_episodic": 13287640,
+    "n_seasonal": 4220420,
+    "n_perennial": 15454900,
+    "n_total_gde": 32962960
+  }
+}

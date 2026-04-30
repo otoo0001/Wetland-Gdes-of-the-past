@@ -1,0 +1,142 @@
+# wetGDE Area Pipeline
+
+Computes monthly wetGDE area (km²) by WWF biome and country, either across a
+full monthly time series or for a 12-month climatology. Output is written to
+parquet.
+
+---
+
+## Structure
+
+```
+gde_area/
+├── config.py   # all paths, constants, logging setup
+├── utils.py    # QA loading, masking, reprojection, pixel area, area summation
+├── io.py       # biome/country rasterization, parquet save
+├── model.py    # orchestration and entry point
+└── README.md
+```
+
+---
+
+## Modes
+
+Set `MODE` in `config.py` before running.
+
+| `MODE` | Input | Time labels | Output time column |
+|---|---|---|---|
+| `"timeseries"` | Full monthly NetCDF | pandas Timestamps | `time` |
+| `"climatology"` | 12-step mean annual cycle NetCDF | integers 1–12 | `month` |
+
+Output filenames include the mode, e.g. `gde_area_by_biome_timeseries.parquet`.
+
+---
+
+## Configuration (`config.py`)
+
+| Variable | Description |
+|---|---|
+| `MODE` | `"timeseries"` or `"climatology"` |
+| `WET_NC` | Path to wetGDE NetCDF input |
+| `BIOME_SHP` | Path to WWF terrestrial ecoregions shapefile |
+| `COUNTRY_SHP` | Path to World Bank countries shapefile |
+| `OPEN_WATER_TIF` | Path to GLWD open-water mask GeoTIFF |
+| `PERSISTENCE_TIF` | Path to wetGDE persistence mask GeoTIFF |
+| `QA_FILES` | List of QA flag NetCDF files (static flags + spin-up) |
+| `OUT_DIR` | Output directory |
+| `START_DATE` | Fallback start date for time axis decoding (timeseries mode only) |
+| `MAX_WORKERS` | Number of threads for parallel area computation |
+| `TEST_MODE` | If `True`, process only the first time step |
+
+---
+
+## Inputs
+
+### wetGDE NetCDF (`WET_NC`)
+- Variable name: `wetGDE`
+- Dimensions: `(time, lat, lon)` or `(time, latitude, longitude)`
+- For climatology mode: must have exactly 12 time steps
+
+### QA flags (`QA_FILES`)
+Two files are expected:
+- `static_quality_flags.nc`: mountains, karst, and permafrost flags
+- `spin_up_1960.nc`: spin-up quality flag
+
+Cells are excluded where any static flag is non-zero, where spin-up flag is 4
+or 6, or where open water is present.
+
+### Persistence mask (`PERSISTENCE_TIF`)
+Integer GeoTIFF with values:
+- `-1` = nodata
+- `0` = non-GDE
+- `1` = episodic
+- `2` = seasonal
+- `3` = perennial
+
+Only cells with values 1–3 are included in the analysis mask.
+
+### Open-water mask (`OPEN_WATER_TIF`)
+Binary GeoTIFF derived from GLWD. Cells flagged as open water are excluded.
+
+### Shapefiles
+- Biomes: WWF terrestrial ecoregions (`wwf_terr_ecos.shp`), field `BIOME`, values 1–14
+- Countries: World Bank Admin0 10m, field `ISO`
+
+---
+
+## Outputs
+
+Two parquet files per run:
+
+### `gde_area_by_biome_{mode}.parquet`
+| Column | Type | Description |
+|---|---|---|
+| `time` / `month` | Timestamp / int | Time label |
+| `biome_id` | int | WWF biome ID (1–14) |
+| `area_km2` | float | wetGDE area in km² |
+
+### `gde_area_by_country_{mode}.parquet`
+| Column | Type | Description |
+|---|---|---|
+| `time` / `month` | Timestamp / int | Time label |
+| `ISO` | str | ISO country code |
+| `area_km2` | float | wetGDE area in km² |
+
+Country-time steps with zero wetGDE area are omitted.
+
+---
+
+## Running
+
+```bash
+# edit MODE and paths in config.py, then:
+python model.py
+```
+
+Logs are written to both stdout and `OUT_DIR/gde_area_{mode}.log`.
+
+---
+
+## Analysis mask
+
+The final analysis mask is the intersection of three conditions:
+
+```
+analysis_mask = qa_mask & spin_ok & (~open_water) & (persistence > 0)
+```
+
+This mask is static (time-invariant) and applied to every time step before
+area computation.
+
+---
+
+## Dependencies
+
+```
+numpy
+pandas
+xarray
+geopandas
+rasterio
+affine
+```

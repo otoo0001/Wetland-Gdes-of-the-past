@@ -1,15 +1,4 @@
 #!/usr/bin/env python3
-"""
-creating_max_presence_mask.py
------------------------------
-Creates a wetGDE max-presence mask (GeoTIFF) from an already computed
-climatological max NetCDF.
-
-Classes:
-    -1 - NoData / excluded
-     0 - Non-GDE
-     1 - GDE present
-"""
 
 import os
 import math
